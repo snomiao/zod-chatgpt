@@ -12,7 +12,11 @@ Edit schema and prompt in `main.ts`
 
 install dependencies and run `yarn start`
 
-# Example output
+## Usage
+
+`bun install @snomiao/zod-chatgpt`
+
+## Example output
 
 <details>
 <summary>Small fun thing</summary>
@@ -231,3 +235,7 @@ Result:
 ```
 
 </details>
+
+## Updates
+
+2024-07-16 release as package

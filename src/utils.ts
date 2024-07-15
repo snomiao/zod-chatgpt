@@ -66,7 +66,7 @@ export const generate = async <T extends ZodType>(
     throw new Error("No message returned");
 
   let obj;
-  const response = completion.data.choices[0].message.content;
+  const response = completion.data.choices[0].message.content ?? "";
 
   // parse the response
   try {
