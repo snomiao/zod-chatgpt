@@ -1,6 +1,6 @@
 {
   "name": "@snomiao/zod-chatgpt",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "license": "MIT",
   "author": "snomiao <snomiao@gmail.com>, @olup <https://github.com/olup/>",
   "exports": {
@@ -15,8 +15,9 @@
     "dist"
   ],
   "scripts": {
-    "build": "bun build index.ts --outdir=dist && bun build:umd",
-    "build:types": "tsc -d --noEmit false --emitDeclarationOnly --outDir dist",
+    "build": "bun build:type && bun build:js && bun build:umd",
+    "build:js": "bun build index.ts --outdir=dist",
+    "build:type": "tsc -d --noEmit false --emitDeclarationOnly --outDir dist",
     "build:umd": "bunx rollup dist/index.js --file dist/index.umd.js --format umd --name zodChatGPT",
     "prerelease": "bun run build && bun run test",
     "release": "bunx standard-version && git push --follow-tags && npm publish",
