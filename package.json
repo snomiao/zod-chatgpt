@@ -1,21 +1,22 @@
 {
   "name": "@snomiao/zod-chatgpt",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "license": "MIT",
   "author": "snomiao <snomiao@gmail.com>, @olup <https://github.com/olup/>",
   "exports": {
     "import": "./dist/index.js",
-    "types": "./index.ts"
+    "types": "./dist/index.d.ts"
   },
-  "main": "index.ts",
-  "module": "index.ts",
-  "types": "./index.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "*.ts",
     "dist"
   ],
   "scripts": {
     "build": "bun build index.ts --outdir=dist && bun build:umd",
+    "build:types": "tsc -d --noEmit false --emitDeclarationOnly --outDir dist",
     "build:umd": "bunx rollup dist/index.js --file dist/index.umd.js --format umd --name zodChatGPT",
     "prerelease": "bun run build && bun run test",
     "release": "bunx standard-version && git push --follow-tags && npm publish",
@@ -23,17 +24,17 @@
     "test": "bun test"
   },
   "dependencies": {
-    "dotenv": "^16.0.3",
-    "openai": "^3.2.1",
-    "zod": "^3.21.4",
-    "zod-to-json-schema": "^3.20.4"
+    "dotenv": "^16.4.5",
+    "openai": "^3.3.0",
+    "zod": "^3.23.8",
+    "zod-to-json-schema": "^3.23.2"
   },
   "devDependencies": {
     "@types/bun": "^1.1.6",
     "@types/jest": "^29.5.12",
-    "@types/node": "^18.15.11",
-    "tsx": "^3.12.6",
-    "typescript": "^5.5.3"
+    "@types/node": "^18.19.43",
+    "tsx": "^3.14.0",
+    "typescript": "^5.5.4"
   },
   "publishConfig": {
     "access": "public"
