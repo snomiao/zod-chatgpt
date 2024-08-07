@@ -1,1 +1,2 @@
-export { generate } from "./src/utils";
+export { zodChatGPT as generate, zodChatGPT as zodChatGPT } from "./src/utils";
+

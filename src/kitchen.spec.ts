@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { generate } from "./utils";
+import { zodChatGPT } from "./utils";
 
 it("works", async () => {
   // example zod schema, very easy to use
@@ -13,7 +13,7 @@ it("works", async () => {
   // the prompt to which the answer will be generated on the proper schema
   const prompt = "I am going to the kitchen";
 
-  const result = await generate(schema, prompt, { chatCompletionOptions: { temperature: 0 } })
+  const result = await zodChatGPT(schema, prompt, { chatCompletionOptions: { temperature: 0 } })
   // result is properly typed, and guaranteed to match the schema
   console.log(result);
 

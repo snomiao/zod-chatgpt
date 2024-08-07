@@ -1,7 +1,6 @@
 import { Configuration, CreateChatCompletionRequest, OpenAIApi } from "openai";
-import { ZodType, object, z } from "zod";
+import { ZodType, z } from "zod";
 import zodToJsonSchema from "zod-to-json-schema";
-import "dotenv/config";
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
@@ -27,7 +26,7 @@ type GenerateOptions = {
  * @param prompt  prompt to which the answer will be generated on the proper schema
  * @returns
  */
-export const generate = async <T extends ZodType>(
+export const zodChatGPT = async <T extends ZodType>(
   schema: T,
   prompt: string,
   options?: GenerateOptions
