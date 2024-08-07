@@ -5,13 +5,13 @@ it("works", async () => {
   // example zod schema, very easy to use
   const schema = z.array(
     z.object({
-      command: z.enum(["switchOn", "switchOff"]),
-      room: z.enum(["livingRoom", "kitchen", "room1", "room2"]),
+      name: z.string(),
+      text: z.string(),
     })
   );
-
+  
   // the prompt to which the answer will be generated on the proper schema
-  const prompt = "I am going to the kitchen";
+  const prompt = "3 pirates talking about their treasure"
 
   const result = await zodChatGPT(schema, prompt);
   // result is properly typed, and guaranteed to match the schema

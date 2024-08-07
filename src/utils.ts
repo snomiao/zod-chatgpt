@@ -1,12 +1,13 @@
-import { Configuration, CreateChatCompletionRequest, OpenAIApi } from "openai";
+import OpenAI from "openai"; // CreateChatCompletionRequest // Configuration,
+import { ChatCompletionMessageParam } from "openai/resources/index.mjs";
 import { ZodType, z } from "zod";
 import zodToJsonSchema from "zod-to-json-schema";
 
-const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+// const configuration = new Configuration({
+//   apiKey: process.env.OPENAI_API_KEY,
+// });
 
-const openai = new OpenAIApi(configuration);
+const openai = new OpenAI();
 
 const defaultTask = `Output a json object or array fitting this schema, based on the PROMPT section below.
 Code only, no commentary, no introduction sentence, no codefence block.
@@ -16,7 +17,7 @@ If you are not sure or cannot generate something for any possible reason, return
 {"error" : <the reason of the error>}`;
 
 type GenerateOptions = {
-  chatCompletionOptions?: Partial<CreateChatCompletionRequest>;
+  chatCompletionOptions?: Partial<ChatCompletionMessageParam>;
   task?: string;
 };
 
@@ -49,9 +50,8 @@ export const zodChatGPT = async <T extends ZodType>(
     """`;
 
   // openai api call
-  const completion = await openai.createChatCompletion({
-    model: "gpt-3.5-turbo",
-    ...options?.chatCompletionOptions,
+  const completion = await openai.chat.completions.create({
+    model: "gpt-4o",
     messages: [
       {
         role: "user",
@@ -61,11 +61,10 @@ export const zodChatGPT = async <T extends ZodType>(
   });
 
   // if the response is empty, throw an error
-  if (!completion.data.choices[0].message)
-    throw new Error("No message returned");
+  if (!completion.choices[0].message) throw new Error("No message returned");
 
   let obj;
-  const response = completion.data.choices[0].message.content ?? "";
+  const response = completion.choices[0].message.content ?? "";
 
   // parse the response
   try {
