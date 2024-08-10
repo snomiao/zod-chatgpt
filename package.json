@@ -1,6 +1,6 @@
 {
   "name": "@snomiao/zod-chatgpt",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "license": "MIT",
   "author": "snomiao <snomiao@gmail.com>, @olup <https://github.com/olup/>",
   "exports": {
